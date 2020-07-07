@@ -1,6 +1,9 @@
 
 import Pojo.AllTeamsPojo;
+import Pojo.Defenders.DefendersPojo;
+import Pojo.Defenders.Squad;
 import Pojo.Team;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
@@ -54,7 +57,6 @@ public class APITasks {
             teams.add(team.getName());
         }
 
-
         return teams;
     }
 
@@ -73,14 +75,47 @@ public class APITasks {
      * Deserialization type: TypeReference
      */
     public static List<String> getDefenders() throws URISyntaxException, IOException {
-        return null;
+
+        HttpClient client = HttpClientBuilder.create().build();
+        URIBuilder uri = new URIBuilder();
+        uri.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/66");
+
+        HttpGet get = new HttpGet(uri.build());
+        get.setHeader("Accept", "application/json");
+        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
+
+        HttpResponse response = client.execute(get);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+        ObjectMapper mapper = new ObjectMapper();
+        DefendersPojo deserialization =  mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false).readValue(response.getEntity().getContent(),
+                new TypeReference<DefendersPojo>() {
+                });
+
+        List<String> defenders = new ArrayList<>();
+        try {
+            for (int i = 0; i < deserialization.getSquad().size(); i++){
+                if (deserialization.getSquad().get(i).getPosition().equalsIgnoreCase("Defender")){
+                    defenders.add(deserialization.getSquad().get(i).getName());
+                    System.out.println(deserialization.getSquad().get(i).getName());
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+
+/*
+"Marcos Rojo", "Harry Maguire", "Victor Nilsson-Lindelöf", "Axel Tuanzebe", "Phil Jones", "Luke Shaw", "Eric Bailly", "Timothy Fosu-Mensah", "Aaron Wan-Bissaka", "Diogo Dalot",
+            "Brandon Williams"
+ */
+
+         return defenders;
     }
 
-    /*
-     * GET names of all midfielders from England team
-     * note: England team id is 66
-     * Deserialization type: Pojo
-     */
+
+
     public static List<String> getMidfielders() throws IOException, URISyntaxException {
         return null;
     }
