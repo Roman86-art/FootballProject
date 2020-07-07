@@ -104,13 +104,6 @@ public class APITasks {
         }
 
 
-
-
-/*
-"Marcos Rojo", "Harry Maguire", "Victor Nilsson-Lindelöf", "Axel Tuanzebe", "Phil Jones", "Luke Shaw", "Eric Bailly", "Timothy Fosu-Mensah", "Aaron Wan-Bissaka", "Diogo Dalot",
-            "Brandon Williams"
- */
-
          return defenders;
     }
 
