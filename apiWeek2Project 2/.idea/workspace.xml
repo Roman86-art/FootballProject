@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab65a105-8f84-4cc0-9c23-f8526531b1a6" name="Default Changelist" comment="" />
+    <list default="true" id="ab65a105-8f84-4cc0-9c23-f8526531b1a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apiWeek2Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/apiWeek2Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/APITasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APITasks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pojo/Squad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pojo/Squad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/APITasks$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/APITasks$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/APITasks$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/APITasks.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/APITasks.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/apiWeek2Project.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Pojo/Area.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Pojo/Area.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Pojo/SpainCoachPojo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Pojo/Squad.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Pojo/Squad.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -19,7 +60,28 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="APITests.getMidfieldersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="apiWeek2Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="APITests" />
+      <option name="METHOD_NAME" value="getMidfieldersTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.APITests.getMidfieldersTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -34,10 +96,45 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="453" y="91" key="#com.intellij.ide.util.MemberChooser" timestamp="1594161300524">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="453" y="91" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1594161300524" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1594081798585">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/0.-1080.1920.1040@0.0.1920.1040" timestamp="1594081798585" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1594162319432">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1594162319432" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1594162319424">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1594162319424" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1594162319422">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1594162319422" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1594162319425">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1594162319425" />
+    <state x="128" y="0" key="SettingsEditor" timestamp="1594160878891">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="128" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1594160878891" />
   </component>
 </project>
