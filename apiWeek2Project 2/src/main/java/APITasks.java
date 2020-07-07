@@ -1,9 +1,19 @@
+
 import com.fasterxml.jackson.core.type.TypeReference;
+
+
+import Pojo.AllTeamsPojo;
+import Pojo.Team;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+
+import org.apache.http.client.methods.HttpPost;
+
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Assert;
@@ -24,7 +34,35 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getAllTeams() throws URISyntaxException, IOException {
-        return null;
+
+        HttpClient client = HttpClientBuilder.create().build();
+
+        //  http://api.football-data.org/v2/teams
+        URIBuilder uriBuilder = new URIBuilder();
+        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams");
+
+        HttpGet get = new HttpGet(uriBuilder.build());
+        get.setHeader("Accept", "application/json");
+        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
+
+        HttpResponse response = client.execute(get);
+
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        AllTeamsPojo allTeamsPojo = objectMapper.readValue(response.getEntity().getContent(), AllTeamsPojo.class);
+
+        List<String> teams = new ArrayList<>();
+        for (Team team : allTeamsPojo.getTeams()){
+
+            teams.add(team.getName());
+        }
+
+
+        return teams;
     }
 
     /*

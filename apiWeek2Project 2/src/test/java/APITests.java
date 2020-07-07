@@ -60,7 +60,7 @@ public class APITests {
         Assert.assertEquals(TestConstants.getExpectedTeams().length, actualTeams.size());
         Assert.assertEquals(Arrays.asList(TestConstants.getExpectedTeams()), actualTeams);
     }
-
+//good job guys
     @Test
     public void getSecondHighestScorer() throws IOException, URISyntaxException {
         List<String> actualSecondHighestScorer = APITasks.getSecondHighestScorer();
