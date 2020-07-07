@@ -1,4 +1,5 @@
 
+import Pojo.MidfieldersPojo;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
@@ -125,7 +126,45 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getMidfielders() throws IOException, URISyntaxException {
-        return null;
+
+        HttpClient client = HttpClientBuilder.create().build();
+
+        //  http://api.football-data.org/v2/teams
+        URIBuilder uriBuilder = new URIBuilder();
+        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/66");
+
+        HttpGet get = new HttpGet(uriBuilder.build());
+        get.setHeader("Accept", "application/json");
+        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
+
+        HttpResponse response = client.execute(get);
+
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        MidfieldersPojo serialize = objectMapper.readValue(response.getEntity().getContent(), MidfieldersPojo.class);
+
+        List<String>midfielder = new ArrayList<>();
+        try {
+
+
+            for (int i = 0; i < serialize.getSquad().size(); i++) {
+                if (serialize.getSquad().get(i).getPosition().equals("Midfielder")) {
+                 //   System.out.println(serialize.getSquad().get(i).getName());
+                    midfielder.add(serialize.getSquad().get(i).getName());
+                }
+
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(midfielder);
+
+        return midfielder;
     }
 
     /*
