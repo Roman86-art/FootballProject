@@ -1,5 +1,6 @@
 
 import Pojo.AllTeamsPojo;
+import Pojo.CoachSpainPojo;
 import Pojo.Team;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -109,7 +110,33 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getSpainCoach() throws URISyntaxException, IOException {
-        return null;
+        HttpClient client = HttpClientBuilder.create().build();
+
+        //  http://api.football-data.org/v2/teams
+        URIBuilder uriBuilder = new URIBuilder();
+        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/77");
+
+        HttpGet get = new HttpGet(uriBuilder.build());
+        get.setHeader("Accept", "application/json");
+        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
+
+        HttpResponse response = client.execute(get);
+
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        CoachSpainPojo coachSpainPojo = objectMapper.readValue(response.getEntity().getContent(), CoachSpainPojo.class);
+        List<String>spainCoaches=new ArrayList<>();
+        for (int i = 0; i <coachSpainPojo.getSquad().size() ; i++) {
+            if(coachSpainPojo.getSquad().get(i).getRole().equals("COACH")){
+                spainCoaches.add(coachSpainPojo.getSquad().get(i).getName());
+            }
+
+        }
+        System.out.println(spainCoaches);
+        return spainCoaches;
     }
 
     /*
