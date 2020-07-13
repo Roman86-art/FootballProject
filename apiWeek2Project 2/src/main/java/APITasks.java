@@ -1,18 +1,22 @@
 
-import Pojo.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import Pojo.AllTeamsPojo;
+import Pojo.CoachSpainPojo;
+import Pojo.Team;
+import io.restassured.mapper.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Assert;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nurkulov 12/26/19
@@ -46,8 +50,11 @@ public class APITasks {
         AllTeamsPojo allTeamsPojo = objectMapper.readValue(response.getEntity().getContent(), AllTeamsPojo.class);
 
         List<String> teams = new ArrayList<>();
-        for (Team team : allTeamsPojo.getTeams())
+        for (Team team : allTeamsPojo.getTeams()){
+
             teams.add(team.getName());
+        }
+
 
         return teams;
     }
@@ -72,6 +79,7 @@ public class APITasks {
         HttpResponse response = client.execute(get);
 
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> allGoalKeepers = objectMapper.readValue(response.getEntity().getContent(),
                 new TypeReference<Map<String, Object>>() {
@@ -80,13 +88,23 @@ public class APITasks {
         List<Map<String, Object>> squad = (List<Map<String, Object>>) allGoalKeepers.get("squad");
         List<String> goalKeepers = new ArrayList<>();
 
+
+        ObjectMapper objectMapper= new ObjectMapper();
+      Map<String, Object> allGoalKeepers = objectMapper.readValue(response.getEntity().getContent(),
+                new TypeReference<Map<String, Object>>() {
+                });
+
+     List<Map<String, Object>> squad= (List<Map<String, Object>>) allGoalKeepers.get("squad");
+
+        List<String> goalKeepers= new ArrayList<>();
         try {
-            for (int i = 0; i < squad.size(); i++)
-                if (squad.get(i).get("position").equals("Goalkeeper")) {
+            for (int i=0; i<squad.size(); i++){
+                if(squad.get(i).get("position").equals("Goalkeeper")){
                     System.out.println(squad.get(i).get("name"));
                     goalKeepers.add(squad.get(i).get("name").toString());
                 }
-        } catch (Exception e) {
+            }
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
         return goalKeepers;
@@ -98,41 +116,7 @@ public class APITasks {
      * Deserialization type: TypeReference
      */
     public static List<String> getDefenders() throws URISyntaxException, IOException {
-
-        HttpClient client = HttpClientBuilder.create().build();
-
-        //  http://api.football-data.org/v2/teams/66
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/66");
-
-        HttpGet get = new HttpGet(uriBuilder.build());
-        get.setHeader("Accept", "application/json");
-        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
-
-        HttpResponse response = client.execute(get);
-
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> allDefenders = objectMapper.readValue(response.getEntity().getContent(),
-                new TypeReference<Map<String, Object>>() {
-                });
-
-        List<Map<String, Object>> squad = (List<Map<String, Object>>) allDefenders.get("squad");
-
-        List<String> defenders = new ArrayList<>();
-
-        try {
-            for (int i = 0; i < squad.size(); i++)
-                if (squad.get(i).get("position").equals("Defender")) {
-                    System.out.println(squad.get(i).get("name"));
-                    defenders.add(squad.get(i).get("name").toString());
-                }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println(defenders);
-        return defenders;
+        return null;
     }
 
 
@@ -142,6 +126,7 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getMidfielders() throws IOException, URISyntaxException {
+
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -173,6 +158,7 @@ public class APITasks {
         System.out.println(midfielder);
 
         return midfielder;
+
     }
 
     /*
@@ -181,40 +167,7 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getMidfielderFromBrazil() throws URISyntaxException, IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-
-        //  http://api.football-data.org/v2/teams/66
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/66");
-
-        HttpGet get = new HttpGet(uriBuilder.build());
-        get.setHeader("Accept", "application/json");
-        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
-
-        HttpResponse response = client.execute(get);
-
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        MidfieldersPojo midfieldersPojo = objectMapper.readValue(response.getEntity().getContent(), MidfieldersPojo.class);
-
-        List<String> midfielderBrazilian = new ArrayList<>();
-        try {
-
-            for (int i = 0; i < midfieldersPojo.getSquad().size(); i++)
-                if (midfieldersPojo.getSquad().get(i).getPosition().equals("Midfielder") && midfieldersPojo.getSquad().get(i).getNationality().equals("Brazil"))
-                    midfielderBrazilian.add(midfieldersPojo.getSquad().get(i).getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println(midfielderBrazilian);
-
-
-        return midfielderBrazilian;
+        return null;
     }
 
     /*
@@ -223,40 +176,7 @@ public class APITasks {
      * Deserialization type: Pojo
      */
     public static List<String> getAttackerFromEngland() throws URISyntaxException, IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-
-        //  http://api.football-data.org/v2/teams/66
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setScheme("http").setHost("api.football-data.org").setPath("v2/teams/66");
-
-        HttpGet get = new HttpGet(uriBuilder.build());
-        get.setHeader("Accept", "application/json");
-        get.setHeader("X-Auth-Token", "72bd7f61c55842bd88ee905ed35f15db");
-
-        HttpResponse response = client.execute(get);
-
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        MidfieldersPojo midfieldersPojo = objectMapper.readValue(response.getEntity().getContent(), MidfieldersPojo.class);
-
-        List<String> attackerFromEngland = new ArrayList<>();
-        try {
-
-
-            for (int i = 0; i < midfieldersPojo.getSquad().size(); i++)
-                if (midfieldersPojo.getSquad().get(i).getPosition().equals("Attacker") && midfieldersPojo.getSquad().get(i).getNationality().equals("England"))
-                    attackerFromEngland.add(midfieldersPojo.getSquad().get(i).getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println(attackerFromEngland);
-
-        return attackerFromEngland;
+        return null;
     }
 
     /*
@@ -284,12 +204,16 @@ public class APITasks {
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         CoachSpainPojo coachSpainPojo = objectMapper.readValue(response.getEntity().getContent(), CoachSpainPojo.class);
-        List<String> spainCoaches = new ArrayList<>();
-        for (int i = 0; i < coachSpainPojo.getSquad().size(); i++)
-            if (coachSpainPojo.getSquad().get(i).getRole().equals("COACH"))
+        List<String>spainCoaches=new ArrayList<>();
+        for (int i = 0; i <coachSpainPojo.getSquad().size() ; i++) {
+            if(coachSpainPojo.getSquad().get(i).getRole().equals("COACH")){
                 spainCoaches.add(coachSpainPojo.getSquad().get(i).getName());
+            }
+
+        }
         System.out.println(spainCoaches);
         return spainCoaches;
+
 
 
     }
@@ -299,6 +223,8 @@ public class APITasks {
     Deserialization type: POJO
      */
     public static List<String> getAllCompetitions() throws URISyntaxException, IOException {
+        return null;
+
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -366,6 +292,16 @@ public class APITasks {
 
             System.out.println(secondHighestScorers);
 
-            return secondHighestScorers;
-        }
     }
+
+
+    /*
+     * GET names of second highest scorrer from competitions of 2000 season
+     * note: endpoint for competitions: `competitions/<year>/
+     * note: endpoint for scorers: `competitions/<year>/scorers`
+     * Deserialization type: Pojo and TypeReference
+     */
+    public static List<String> getSecondHighestScorer() throws URISyntaxException, IOException {
+        return null;
+    }
+}
