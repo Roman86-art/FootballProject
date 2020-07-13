@@ -291,17 +291,9 @@ public class APITasks {
             }
 
             System.out.println(secondHighestScorers);
+         
+            return secondHighestScorers;
 
     }
 
-
-    /*
-     * GET names of second highest scorrer from competitions of 2000 season
-     * note: endpoint for competitions: `competitions/<year>/
-     * note: endpoint for scorers: `competitions/<year>/scorers`
-     * Deserialization type: Pojo and TypeReference
-     */
-    public static List<String> getSecondHighestScorer() throws URISyntaxException, IOException {
-        return null;
-    }
 }
