@@ -72,14 +72,12 @@ public class APITasks {
         HttpResponse response = client.execute(get);
 
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
-
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> allGoalKeepers = objectMapper.readValue(response.getEntity().getContent(),
                 new TypeReference<Map<String, Object>>() {
                 });
 
         List<Map<String, Object>> squad = (List<Map<String, Object>>) allGoalKeepers.get("squad");
-
         List<String> goalKeepers = new ArrayList<>();
 
         try {
@@ -160,18 +158,13 @@ public class APITasks {
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
 
         ObjectMapper objectMapper = new ObjectMapper();
-
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         MidfieldersPojo serialize = objectMapper.readValue(response.getEntity().getContent(), MidfieldersPojo.class);
 
         List<String> midfielder = new ArrayList<>();
         try {
-
-
-            //   System.out.println(serialize.getSquad().get(i).getName());
             for (int i = 0; i < serialize.getSquad().size(); i++)
-                if (serialize.getSquad().get(i).getPosition().equals("Midfielder"))
+                if (serialize.getSquad().get(i).getPosition().equals("Midfielder") )
                     midfielder.add(serialize.getSquad().get(i).getName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -327,9 +320,7 @@ public class APITasks {
             for (Competition competition : competitionsPojo.getCompetitions() ) {
                 allCompetitions.add(competition.getName());
             }
-
             return allCompetitions;
-
         }
 
         /*
