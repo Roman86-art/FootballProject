@@ -367,6 +367,7 @@ public class APITasks {
            }
            List<Integer> secondHighest= new ArrayList<>(goals);
             int secondMostGoals=secondHighest.get(secondHighest.size()-2);
+
             for(Scorers scorers: secondBestScorersPojo.getScorers()){
                 if (scorers.getNumberOfGoals()==secondMostGoals){
                     secondHighestScorers.add(scorers.getPlayer().get("name").toString());
