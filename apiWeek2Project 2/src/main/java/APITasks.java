@@ -211,7 +211,6 @@ public class APITasks {
         List<String> midfielderBrazilian = new ArrayList<>();
         try {
 
-
             for (int i = 0; i < midfieldersPojo.getSquad().size(); i++)
                 if (midfieldersPojo.getSquad().get(i).getPosition().equals("Midfielder") && midfieldersPojo.getSquad().get(i).getNationality().equals("Brazil"))
                     midfielderBrazilian.add(midfieldersPojo.getSquad().get(i).getName());
