@@ -2,6 +2,19 @@ package Pojo;
 
 public class Squad {
     private String name;
+    private String role;
+    private String position;
+    private String nationality;
+
+
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
     public String getName() {
         return name;
@@ -18,10 +31,6 @@ public class Squad {
     public void setRole(String role) {
         this.role = role;
     }
-
-    private String role;
-
-    private String position;
 
     public String getPosition() {
         return position;

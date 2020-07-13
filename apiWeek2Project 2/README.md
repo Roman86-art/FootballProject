@@ -13,14 +13,14 @@
 - teams/
 
 #Competitions path
-- competitions/
+- competition/
 
 ##Endpoints
 - {teamId}:
     * teams/66 - England teamId
     * teams/77 - Spain teamId
 - competition scorers:
-    * competitions/2000/scorers/
+    * competition/2000/scorers/
 
 
 
